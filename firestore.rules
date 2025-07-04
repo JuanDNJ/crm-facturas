@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Regla para la colección 'users'
+    match /users/{userId} {
+      // Permite a los usuarios autenticados leer y escribir en su propio documento de usuario
+      // (donde el ID del documento de usuario coincide con el UID del usuario autenticado)
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      // Regla para la subcolección 'seals' dentro de cada usuario
+      match /seals/{sealId} {
+        // Permite a los usuarios autenticados leer sus propios sellos
+        allow read: if request.auth != null && request.auth.uid == userId;
+        // Permite a los usuarios autenticados crear sellos en su propia subcolección
+        allow create: if request.auth != null && request.auth.uid == userId;
+        // Permite a los usuarios autenticados actualizar y eliminar sus propios sellos
+        allow update, delete: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+    // Opcional: Si tienes otras colecciones que no son de usuario y necesitan reglas,
+    // las definirías aquí, fuera del bloque 'users'.
+    // Por ejemplo:
+    // match /public_data/{documentId} {
+    //   allow read: if true; // Cualquiera puede leer
+    //   // allow write: if false; // Nadie puede escribir
+    // }
+  }
+}
