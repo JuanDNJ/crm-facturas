@@ -45,9 +45,10 @@ Aquí se detalla el estado actual de las funcionalidades del CRM:
 *   **Estilos:**
     *   ✅ Integración completa de Tailwind CSS.
     *   ✅ Reemplazo de Material UI por Tailwind CSS en componentes existentes.
+    *   ✅ Eliminación de `App.css` ya que no se utilizaba y los estilos se gestionan con Tailwind CSS.
 *   **Configuración:**
     *   ✅ Integración y configuración de Firebase (Auth, Firestore y Storage).
-    *   ✅ Manejo seguro de variables de entorno (`.env`) para claves API.
+    *   ✅ Manejo seguro de variables de entorno (`.env`) para claves API, incluyendo la configuración de Firebase.
 
 ### **Funcionalidades Pendientes (🚧)**
 
@@ -71,8 +72,8 @@ Aquí se detalla el estado actual de las funcionalidades del CRM:
 
 Para asegurar la escalabilidad y mantenibilidad del proyecto, se está implementando una estrategia de refactorización basada en los principios SOLID, con un enfoque inicial en el **Principio de Responsabilidad Única (SRP)**. Esto implica:
 
-*   **Separación de Lógica en Hooks Personalizados:** La lógica de negocio, manejo de estado y llamadas a la API se extraerá de los componentes de React y se encapsulará en hooks personalizados (`use...Logic.ts`). Esto permite que los componentes se centren únicamente en la renderización de la interfaz de usuario.
-*   **Componentes Presentacionales:** La interfaz de usuario se dividirá en componentes más pequeños y reutilizables, que serán puramente presentacionales y recibirán sus datos y funciones a través de props.
+*   **Separación de Lógica en Hooks Personalizados:** La lógica de negocio, manejo de estado y llamadas a la API se extraerá de los componentes de React y se encapsulará en hooks personalizados (ej. `useSealsLogic.ts`). Esto permite que los componentes se centren únicamente en la renderización de la interfaz de usuario.
+*   **Componentes Presentacionales:** La interfaz de usuario se dividirá en componentes más pequeños y reutilizables, que serán puramente presentacionales y recibirán sus datos y funciones a través de props (ej. `SealFormModal.tsx` para el formulario del modal y `SealCard.tsx` para la visualización individual de sellos).
 *   **Servicios de Datos (Opcional):** Para una mayor abstracción y desacoplamiento, se podría considerar la creación de una capa de servicios para interactuar con Firebase, separando aún más la lógica de acceso a datos.
 
 Esta aproximación mejorará la claridad del código, facilitará las pruebas y permitirá una evolución más sencilla del proyecto.
