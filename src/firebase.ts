@@ -7,12 +7,12 @@ import { getStorage } from "firebase/storage"; // Importar getStorage
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDKrUdXJAper3UwZ3Pql_Q5v9Nzp6zTbRY",
-  authDomain: "crm-facturas.firebaseapp.com",
-  projectId: "crm-facturas",
-  storageBucket: "crm-facturas.firebasestorage.app",
-  messagingSenderId: "1092535786069",
-  appId: "1:1092535786069:web:a874faab3b2e0690f692dc"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 // Initialize Firebase

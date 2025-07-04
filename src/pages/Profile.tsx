@@ -106,9 +106,17 @@ const Profile: React.FC = () => {
       await setDoc(docRef, { photoURL: downloadURL }, { merge: true });
       setSuccessMessage('Foto de perfil actualizada con éxito!');
       console.log('Foto subida y URL guardada en Firestore:', downloadURL);
-    } catch (err: any) {
-      setErrorProfile(`Error al subir la foto de perfil: ${err.message || err.code || 'Error desconocido'}`);
-      console.error('Error detallado al subir foto:', err);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setErrorProfile(`Error al subir la foto de perfil: ${err.message}`);
+        console.error('Error detallado al subir foto:', err);
+      } else if (typeof err === 'object' && err !== null && 'code' in err) {
+        setErrorProfile(`Error al subir la foto de perfil: ${(err as { code?: string }).code || 'Error desconocido'}`);
+        console.error('Error detallado al subir foto:', err);
+      } else {
+        setErrorProfile('Error al subir la foto de perfil: Error desconocido');
+        console.error('Error detallado al subir foto:', err);
+      }
     } finally {
       setUploadingPhoto(false);
     }
