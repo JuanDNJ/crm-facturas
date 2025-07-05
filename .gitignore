@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 .gemini
+.firebase
+firebase.json
+firestore.indexes.json
+firestrore.rules.json
+.firecaserc
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
