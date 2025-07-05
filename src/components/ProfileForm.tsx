@@ -1,10 +1,10 @@
 import React from 'react';
 
 interface ProfileFormProps {
-  displayName: string;
-  setDisplayName: (value: string) => void;
-  lastName: string;
-  setLastName: (value: string) => void;
+  userName: string;
+  setUserName: (value: string) => void;
+  userLastName: string;
+  setUserLastName: (value: string) => void;
   companyName: string;
   setCompanyName: (value: string) => void;
   taxId: string;
@@ -30,10 +30,10 @@ interface ProfileFormProps {
 }
 
 export const ProfileForm: React.FC<ProfileFormProps> = ({
-  displayName,
-  setDisplayName,
-  lastName,
-  setLastName,
+  userName,
+  setUserName,
+  userLastName,
+  setUserLastName,
   companyName,
   setCompanyName,
   taxId,
@@ -67,21 +67,21 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
           type="text"
           id="displayName"
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value={displayName}
-          onChange={(e) => setDisplayName(e.target.value)}
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
         />
       </div>
 
       <div>
-        <label htmlFor="lastName" className="block text-gray-700 text-sm font-bold mb-2">
+        <label htmlFor="userLastName" className="block text-gray-700 text-sm font-bold mb-2">
           Apellidos
         </label>
         <input
           type="text"
-          id="lastName"
+          id="userLastName"
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
+          value={userLastName}
+          onChange={(e) => setUserLastName(e.target.value)}
         />
       </div>
 

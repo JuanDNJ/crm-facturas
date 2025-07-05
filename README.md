@@ -28,8 +28,8 @@ Aquí se detalla el estado actual de las funcionalidades del CRM:
   * ✅ Página principal para usuarios autenticados.
 * **Perfil de Usuario:**
   * ✅ Visualización del email del usuario.
-  * ✅ Actualización del nombre de usuario (`displayName`) en Firestore.
-  * ✅ Añadidos campos para apellidos, nombre de empresa, NIF/CIF, dirección, ciudad y país.
+  * ✅ Actualización del nombre de usuario (`userName`) y apellidos (`userLastName`) en Firestore.
+  * ✅ Añadidos campos para nombre de empresa, NIF/CIF, dirección, ciudad y país.
   * ✅ Funcionalidad para subir foto de perfil a Firebase Storage y guardar su URL en Firestore.
   * ✅ Generación de IBAN aleatorio para pruebas (si no existe).
   * ✅ Campos para IBAN, moneda por defecto, IVA por defecto e IRPF por defecto.
@@ -37,9 +37,13 @@ Aquí se detalla el estado actual de las funcionalidades del CRM:
   * ✅ Creación de una página dedicada para la gestión de sellos (`/seals`).
   * ✅ Funcionalidades CRUD (Crear, Leer, Actualizar, Eliminar) para sellos de usuario.
   * ✅ Subida de imágenes de sellos a Firebase Storage.
-  * ✅ Validación de formularios con `zod` y manejo con `react-hook-form`.
+  * ✅ Formulario de creación/edición de sellos responsivo (modal en móvil/tablet, panel lateral en escritorio).
+  * ✅ Validación de formularios mejorada con `zod` y `react-hook-form` (campos obligatorios, mensajes de error, botón de envío deshabilitado).
+  * ✅ Pre-rellenado automático de nombre y apellidos del perfil de usuario en el formulario de sellos.
   * ✅ Notificaciones al usuario con `react-toastify`.
   * ✅ Pre-rellenado automático de datos fiscales del usuario (nombre de empresa, NIF/CIF, dirección, ciudad, país) en el formulario de sellos.
+  * ✅ Implementación de scroll infinito para la lista de sellos.
+  * ✅ Componente `SealCard` simplificado y modularizado, con botones de acción (Editar, Eliminar, Visualizar) en la parte inferior derecha.
 * **Navegación:**
   * ✅ Componente `Header` global para navegación básica.
 * **Estilos:**
@@ -63,7 +67,6 @@ Aquí se detalla el estado actual de las funcionalidades del CRM:
   * 🚧 Campos detallados para facturas (fecha, número, productos/servicios, importe, estado, etc.).
 * **Mejoras en UI/UX:**
   * 🚧 Implementación de una barra de navegación lateral (Sidebar) más completa.
-  * 🚧 Validación de formularios robusta para asegurar la integridad de los datos.
   * 🚧 Sistema de notificaciones al usuario (ej. `Snackbar` de Material UI).
 * **Funcionalidades Adicionales del Perfil:**
   * 🚧 Opción para cambiar la contraseña y/o el email del usuario.
@@ -72,8 +75,8 @@ Aquí se detalla el estado actual de las funcionalidades del CRM:
 
 Para asegurar la escalabilidad y mantenibilidad del proyecto, se está implementando una estrategia de refactorización basada en los principios SOLID, con un enfoque inicial en el **Principio de Responsabilidad Única (SRP)**. Esto implica:
 
-* **Separación de Lógica en Hooks Personalizados:** La lógica de negocio, manejo de estado y llamadas a la API se extraerá de los componentes de React y se encapsulará en hooks personalizados (ej. `useSealsLogic.ts`). Esto permite que los componentes se centren únicamente en la renderización de la interfaz de usuario.
-* **Componentes Presentacionales:** La interfaz de usuario se dividirá en componentes más pequeños y reutilizables, que serán puramente presentacionales y recibirán sus datos y funciones a través de props (ej. `SealFormModal.tsx` para el formulario del modal y `SealCard.tsx` para la visualización individual de sellos).
+* **Separación de Lógica en Hooks Personalizados:** La lógica de negocio, manejo de estado y llamadas a la API se extraerá de los componentes de React y se encapsulará en hooks personalizados (ej. `useSealsLogic.ts`). Esto permite que los componentes se centren únicamente en la renderización de la interfaz de usuario. **Se ha añadido `useMediaQuery.ts` para la detección de tamaño de pantalla y se ha refactorizado `useSealsLogic.ts` para centralizar la gestión de datos de sellos y la paginación con scroll infinito.**
+* **Componentes Presentacionales:** La interfaz de usuario se dividirá en componentes más pequeños y reutilizables, que serán puramente presentacionales y recibirán sus datos y funciones a través de props (ej. `SealFormModal.tsx` para el formulario del modal y `SealCard.tsx` para la visualización individual de sellos). **Se han creado `SealForm.tsx` (formulario base) y `SealFormSidebar.tsx` (contenedor para panel lateral), y `SealCard.tsx` (tarjeta de sello simplificada y modularizada) para una mayor modularidad.**
 * **Servicios de Datos (Opcional):** Para una mayor abstracción y desacoplamiento, se podría considerar la creación de una capa de servicios para interactuar con Firebase, separando aún más la lógica de acceso a datos.
 
 Esta aproximación mejorará la claridad del código, facilitará las pruebas y permitirá una evolución más sencilla del proyecto.

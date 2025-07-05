@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaUpload } from 'react-icons/fa';
 
 interface ProfilePhotoUploaderProps {
   photoURL: string | null;

@@ -22,7 +22,10 @@ const Dashboard: React.FC = () => {
     <DashboardContent
       displayName={displayName}
       user={user}
-    />
+    >
+
+      <p>Aquí irá el contenido del dashboard</p>
+    </DashboardContent>
   );
 };
 

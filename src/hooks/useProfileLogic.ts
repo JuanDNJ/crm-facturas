@@ -4,25 +4,12 @@ import { auth, db, storage } from '../firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
-interface UserProfileData {
-  displayName?: string;
-  lastName?: string;
-  companyName?: string;
-  taxId?: string;
-  address?: string;
-  city?: string;
-  country?: string;
-  photoURL?: string | null;
-  iban?: string;
-  defaultCurrency?: string;
-  defaultIVA?: number;
-  defaultIRPF?: number;
-}
+import type { UserProfile } from '../types';
 
 export const useProfileLogic = () => {
   const [user, loadingAuth, errorAuth] = useAuthState(auth);
-  const [displayName, setDisplayName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userLastName, setUserLastName] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [taxId, setTaxId] = useState('');
   const [address, setAddress] = useState('');
@@ -54,9 +41,9 @@ export const useProfileLogic = () => {
           const docRef = doc(db, 'users', user.uid);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
-            const data = docSnap.data() as UserProfileData;
-            setDisplayName(data.displayName || '');
-            setLastName(data.lastName || '');
+            const data = docSnap.data() as UserProfile;
+            setUserName(data.userName || '');
+            setUserLastName(data.userLastName || '');
             setCompanyName(data.companyName || '');
             setTaxId(data.taxId || '');
             setAddress(data.address || '');
@@ -146,8 +133,8 @@ export const useProfileLogic = () => {
     try {
       const docRef = doc(db, 'users', user.uid);
       await setDoc(docRef, {
-        displayName,
-        lastName,
+        userName,
+        userLastName,
         companyName,
         taxId,
         address,
@@ -172,10 +159,10 @@ export const useProfileLogic = () => {
     user,
     loadingAuth,
     errorAuth,
-    displayName,
-    setDisplayName,
-    lastName,
-    setLastName,
+    userName,
+    setUserName,
+    userLastName,
+    setUserLastName,
     companyName,
     setCompanyName,
     taxId,

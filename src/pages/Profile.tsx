@@ -8,10 +8,10 @@ const Profile: React.FC = () => {
     user,
     loadingAuth,
     errorAuth,
-    displayName,
-    setDisplayName,
-    lastName,
-    setLastName,
+    userName,
+    setUserName,
+    userLastName,
+    setUserLastName,
     companyName,
     setCompanyName,
     taxId,
@@ -80,10 +80,10 @@ const Profile: React.FC = () => {
       <p className="text-gray-700 mb-2 text-center">{user.email}</p>
 
       <ProfileForm
-        displayName={displayName}
-        setDisplayName={setDisplayName}
-        lastName={lastName}
-        setLastName={setLastName}
+        userName={userName}
+        setUserName={setUserName}
+        userLastName={userLastName}
+        setUserLastName={setUserLastName}
         companyName={companyName}
         setCompanyName={setCompanyName}
         taxId={taxId}
