@@ -14,7 +14,17 @@ Este proyecto es un sistema de Customer Relationship Management (CRM) enfocado e
 * **Notificaciones:** `react-toastify`
 * **Variables de Entorno:** `dotenv` (integrado con Vite)
 
-## ✨ Funcionalidades
+### ♻️ Estrategia de Refactorización (Principios SOLID)
+
+**¡IMPORTANTE! Esta estrategia es un pilar fundamental para el desarrollo y mantenimiento de este proyecto. Seguirla es IMPRESCINDIBLE para asegurar la escalabilidad, la claridad del código y la facilidad de futuras modificaciones.**
+
+Para asegurar la escalabilidad y mantenibilidad del proyecto, se está implementando una estrategia de refactorización basada en los principios SOLID, con un enfoque inicial en el **Principio de Responsabilidad Única (SRP)**. Esto implica:
+
+* **Separación de Lógica en Hooks Personalizados:** La lógica de negocio, manejo de estado y llamadas a la API se extraerá de los componentes de React y se encapsulará en hooks personalizados (ej. `useSealsLogic.ts`). Esto permite que los componentes se centren únicamente en la renderización de la interfaz de usuario. **Se ha añadido `useMediaQuery.ts` para la detección de tamaño de pantalla y se ha refactorizado `useSealsLogic.ts` para centralizar la gestión de datos de sellos y la paginación con scroll infinito.**
+* **Componentes Presentacionales:** La interfaz de usuario se dividirá en componentes más pequeños y reutilizables, que serán puramente presentacionales y recibirán sus datos y funciones a través de props (ej. `SealFormModal.tsx` para el formulario del modal y `SealCard.tsx` para la visualización individual de sellos). **Se han creado `SealForm.tsx` (formulario base) y `SealFormSidebar.tsx` (contenedor para panel lateral), y `SealCard.tsx` (tarjeta de sello simplificada y modularizada) para una mayor modularidad.**
+* **Servicios de Datos (Opcional):** Para una mayor abstracción y desacoplamiento, se podría considerar la creación de una capa de servicios para interactuar con Firebase, separando aún más la lógica de acceso a datos.
+
+Esta aproximación mejorará la claridad del código, facilitará las pruebas y permitirá una evolución más sencilla del proyecto.
 
 Aquí se detalla el estado actual de las funcionalidades del CRM:
 
@@ -56,30 +66,27 @@ Aquí se detalla el estado actual de las funcionalidades del CRM:
 
 ### **Funcionalidades Pendientes (🚧)**
 
+* **Filtrado de Sellos:**
+
+  * 🚧 Implementar una funcionalidad de filtrado para los sellos en la página de gestión, incluyendo una barra de búsqueda por nombre.
 * **Gestión de Clientes:**
+
   * 🚧 Crear una sección/página dedicada a la gestión de clientes.
   * 🚧 Funcionalidades CRUD (Crear, Leer, Actualizar, Eliminar) para clientes.
   * 🚧 Formularios para la entrada y edición de datos de clientes (nombre, dirección, contacto, etc.).
 * **Gestión de Facturas:**
+
   * 🚧 Crear una sección/página dedicada a la gestión de facturas.
   * 🚧 Funcionalidades CRUD (Crear, Leer, Actualizar, Eliminar) para facturas.
   * 🚧 Asociación de facturas a clientes existentes.
   * 🚧 Campos detallados para facturas (fecha, número, productos/servicios, importe, estado, etc.).
 * **Mejoras en UI/UX:**
+
   * 🚧 Implementación de una barra de navegación lateral (Sidebar) más completa.
   * 🚧 Sistema de notificaciones al usuario (ej. `Snackbar` de Material UI).
 * **Funcionalidades Adicionales del Perfil:**
+
   * 🚧 Opción para cambiar la contraseña y/o el email del usuario.
-
-### ♻️ Estrategia de Refactorización (Principios SOLID)
-
-Para asegurar la escalabilidad y mantenibilidad del proyecto, se está implementando una estrategia de refactorización basada en los principios SOLID, con un enfoque inicial en el **Principio de Responsabilidad Única (SRP)**. Esto implica:
-
-* **Separación de Lógica en Hooks Personalizados:** La lógica de negocio, manejo de estado y llamadas a la API se extraerá de los componentes de React y se encapsulará en hooks personalizados (ej. `useSealsLogic.ts`). Esto permite que los componentes se centren únicamente en la renderización de la interfaz de usuario. **Se ha añadido `useMediaQuery.ts` para la detección de tamaño de pantalla y se ha refactorizado `useSealsLogic.ts` para centralizar la gestión de datos de sellos y la paginación con scroll infinito.**
-* **Componentes Presentacionales:** La interfaz de usuario se dividirá en componentes más pequeños y reutilizables, que serán puramente presentacionales y recibirán sus datos y funciones a través de props (ej. `SealFormModal.tsx` para el formulario del modal y `SealCard.tsx` para la visualización individual de sellos). **Se han creado `SealForm.tsx` (formulario base) y `SealFormSidebar.tsx` (contenedor para panel lateral), y `SealCard.tsx` (tarjeta de sello simplificada y modularizada) para una mayor modularidad.**
-* **Servicios de Datos (Opcional):** Para una mayor abstracción y desacoplamiento, se podría considerar la creación de una capa de servicios para interactuar con Firebase, separando aún más la lógica de acceso a datos.
-
-Esta aproximación mejorará la claridad del código, facilitará las pruebas y permitirá una evolución más sencilla del proyecto.
 
 ## ⚙️ Configuración Local
 

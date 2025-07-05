@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 import type { Seal, UserProfile, SealFormData } from '../types';
 
-  export const useSealsLogic = () => {
+export const useSealsLogic = () => {
   const SEALS_PER_PAGE = 10; // Define cuántos sellos cargar por página
 
   const [user, loadingAuth] = useAuthState(auth);
